@@ -36,6 +36,7 @@ nav ul li a:hover{
 
 main {
     padding: 20px;
+    display: flex;
 }
 
 section {
@@ -93,4 +94,8 @@ footer{
     width: 100%;
     bottom: 0;
    
+}
+transaction-form{
+    display: flex;
+    flex-direction: column;
 }
