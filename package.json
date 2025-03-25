@@ -21,7 +21,7 @@
   "version": "1.2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mongodb-js/devtools-shared.git"
+    "url": "git+https://github.com/mongodb-js/devtools-shared.git"
   },
   "files": [
     "dist"
@@ -58,9 +58,17 @@
     "test-cov": "nyc -x \"**/*.spec.*\" --reporter=lcov --reporter=text --reporter=html npm run test",
     "test-watch": "npm run test -- --watch",
     "test-ci": "npm run test-cov",
-    "reformat": "npm run prettier -- --write ."
+    "reformat": "npm run prettier -- --write .",
+    "start": "node server.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.13.0",
     "sparse-bitfield": "^3.0.3"
   },
   "devDependencies": {
@@ -77,12 +85,10 @@
     "depcheck": "^1.4.1",
     "eslint": "^7.25.0",
     "gen-esm-wrapper": "^1.1.0",
-    "mocha": "^8.4.0",
+    "mocha": "^11.1.0",
     "nyc": "^15.1.0",
     "prettier": "^2.3.2",
     "sinon": "^9.2.3",
     "typescript": "^5.0.4"
-  },
-  "gitHead": "bfb389a6d229a8e6985eaeb815185eea8154f9a4"
+  }
 }
-

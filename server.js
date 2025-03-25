@@ -1,82 +1,68 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+require('dotenv').config();
+
 const app = express();
-const port = 3000;
+app.use(cors());
+app.use(bodyParser.json());
 
-// Middleware to parse JSON
-app.use(express.json());
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(() => console.log('MongoDB Connected'))
+  .catch(err => console.error('MongoDB Connection Failed:', err));
 
-// Database connection
-mongoose.connect('mongodb://localhost:27017/moneytracking', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("MongoDB connected..."))
-    .catch(err => console.log(err));
-
-// Define schemas
-const transactionSchema = new mongoose.Schema({
-    transactionId: String,
-    name: String,
-    type: String,
-    amount: Number,
-    category: String,
-    date: { type: Date, default: Date.now }
+// User Schema & Model
+const UserSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
 });
 
-const Transaction = mongoose.model('Transaction', transactionSchema);
-
-// API route to add a transaction
-app.post('/api/transactions', (req, res) => {
-    const newTransaction = new Transaction(req.body);
-    newTransaction.save((err, transaction) => {
-        if (err) return res.status(500).send(err);
-        res.status(200).send(transaction);
-    });
+// Hash password before saving
+UserSchema.pre('save', async function(next) {
+    if (!this.isModified('password')) return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
 });
 
-// API route to get all transactions with optional date range filter
-app.get('/api/transactions', (req, res) => {
-    const { start, end, page = 1, limit = 10 } = req.query;
-    const skip = (page - 1) * limit;
-    const filter = {};
+const User = mongoose.model('User', UserSchema);
 
-    if (start && end) {
-        filter.date = { $gte: new Date(start), $lte: new Date(end) };
+// Register Route
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const existingUser = await User.findOne({ username });
+        if (existingUser) return res.status(400).json({ message: 'User already exists' });
+
+        const user = new User({ username, password });
+        await user.save();
+        res.status(201).json({ message: 'User registered successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
     }
-
-    Transaction.find(filter)
-        .skip(skip)
-        .limit(parseInt(limit))
-        .exec((err, transactions) => {
-            if (err) return res.status(500).send(err);
-            res.status(200).send(transactions);
-        });
 });
 
-// API route to get transaction summary
-app.get('/api/summary', (req, res) => {
-    Transaction.aggregate([
-        { 
-            $group: {
-                _id: '$type', 
-                total: { $sum: '$amount' } 
-            }
-        }
-    ], (err, summary) => {
-        if (err) return res.status(500).send(err);
-        const totals = { savings: 0, expenses: 0 };
-        summary.forEach(item => {
-            if (item._id === 'savings') {
-                totals.savings = item.total;
-            } else if (item._id === 'expense') {
-                totals.expenses = item.total;
-            }
-        });
-        res.status(200).send(totals);
-    });
+// Login Route
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await User.findOne({ username });
+        if (!user) return res.status(400).json({ message: 'User not found' });
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ token });
+    } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+    }
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
-
-
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(Server, running, on, PORT, $,{PORT}));
