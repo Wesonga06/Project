@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Expense - Money Tracker</title>
+  <link rel="icon" type="css" href="MART.png">
+  <link rel="stylesheet" href="Indexcss.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="expense.html">Add Expense</a></li>
+        <li><a href="Budget.html">Budget</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Expense</h1>
+    <form id="expense-form" action="add_expense.php" method="POST">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" required>
+
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" required>
+
+      <button type="submit">Add Expense</button>
+    </form>
+  </main>
+  <footer>
+    <p>&copy; 2025 Money Tracker</p>
+  </footer>
+  <script src="validation.js"></script>
+</body>
+</html>

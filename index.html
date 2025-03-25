@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Accounting & Resource Tracking</title>
+    <link rel="icon" type="css" href="MART.png">
+    <link rel="stylesheet" href="Indexcss.css">
+    <script src="validation.js"></script>
+    <script src="app.js"></script>
+    
+</head>
+<body>
+    <header>
+        <h1>Financial Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="expenses.html">Expenses</a></li>
+                <li><a href="Budget.html">Budgets</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="transactions">
+            <h2>Add Transaction</h2>
+            <form id="transaction-form">
+                <label for="type">Type:</label>
+                <select id="type" name="type" required>
+                    <option value="expense">Expense</option>
+                    <option value="savings">Savings</option>
+                </select>
+                <label for="amount">Amount (KES):</label>
+                <input type="number" id="amount" name="amount" required>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="groceries">Groceries</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="entertainment">Entertainment</option>
+                    <!-- Add more categories as needed -->
+                </select>
+                <button type="submit">Add Transaction</button>
+            </form>
+        </section>
+        <section id="summary">
+            <h2>Summary</h2>
+            <p>Total Savings: <span id="total-savings">0</span> KES</p>
+            <p>Total Expenses: <span id="total-expenses">0</span> KES</p>
+        </section>
+        <section id="transaction-list">
+            <h2>Transaction List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Amount (KES)</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="transaction-table-body">
+                    <!-- Transactions will be dynamically added here -->
+                </tbody>
+            </table>
+        </section>
+        <section id="filters">
+            <h2>Filter Transactions</h2>
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" name="start-date">
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" name="end-date">
+            <button id="filter-button">Filter</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Money Tracker</p>
+      </footer>
+</body>
+</html>
+
+
