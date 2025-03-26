@@ -64,7 +64,7 @@ button {
 }
 
 table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -94,13 +94,11 @@ footer{
     bottom: 0;
    
 }
-transaction-form{
+transaction-form {
     display: flex;
     flex-direction: column;
 }
 .img {
     width: 30%;
     height: 40%;
-
-
 }
