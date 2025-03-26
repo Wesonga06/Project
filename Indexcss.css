@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    background-color: black;
+    background-color: #3C3D37;
     color: white;
     padding: 10px 0;
     text-align: center;
@@ -36,7 +36,6 @@ nav ul li a:hover{
 
 main {
     padding: 20px;
-    display: flex;
 }
 
 section {
@@ -53,7 +52,7 @@ form {
 }
 
 label, input, select, button {
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 button {
@@ -98,4 +97,10 @@ footer{
 transaction-form{
     display: flex;
     flex-direction: column;
+}
+.img {
+    width: 30%;
+    height: 40%;
+
+
 }

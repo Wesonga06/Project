@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Money Accounting & Resource Tracking</title>
+    <title>Transactions - Money Tracker</title>
     <link rel="icon" type="css" href="MART.png">
     <link rel="stylesheet" href="Indexcss.css">
-    <script src="app.js"></script>
     
 </head>
 <body>
     <header>
-        <h1>Financial Dashboard</h1>
+        <h1>Transactions</h1>
+        <img src="MART.png" alt="Logo for Money Accounting & Resource Tracking" class="img">
         <nav>
             <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="expenses.html">Expenses</a></li>
                 <li><a href="Budget.html">Budgets</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="settings.html">Settings</a></li>
             </ul>
         </nav>
     </header>
@@ -27,6 +26,7 @@
             <form id="transaction-form">
                 <label for="type">Type:</label>
                 <select id="type" name="type" required>
+                    <option>--Select one--</option>
                     <option value="expense">Expense</option>
                     <option value="savings">Savings</option>
                 </select>
@@ -39,6 +39,7 @@
                     <option value="groceries">Groceries</option>
                     <option value="utilities">Utilities</option>
                     <option value="entertainment">Entertainment</option>
+                    <option value="savings">Savings</option>
                     <!-- Add more categories as needed -->
                 </select>
                 <button type="submit">Add Transaction</button>
@@ -79,6 +80,7 @@
     <footer>
         <p>&copy; 2025 Money Tracker</p>
       </footer>
+      <script src="app.js"></script>
 </body>
 </html>
 
