@@ -1,31 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Money Accounting & Resource Tracking </title>
-  <link rel="icon" type="css" href="MART.png">
-    <link rel="stylesheet" href="Indexcss.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Tracking Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #D6BD98, #ECDFCC);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            height: 100vh;
+            text-align: center;
+        }
+        .header {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+        .sub-header {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .navbar {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 10px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .card p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Dashboard</h1>
-        <img src="MART.png" alt="Logo for Money Accounting & Resource Tracking" class="img">
-        <nav>
-            <ul>
-                <li><a href="index.html">Transactions</a></li>
-                <li><a href="expenses.html">Expenses</a></li>
-                <li><a href="Budget.html">Budgets</a></li>
-                <li><a href="inventory.html">Inventory</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
-    </header>
-    <h1>Welcome to Money Accounting and Resource Tracking</h1>
-
-
-
-
-    <script src="app.js"></script>
+    <div class="header">Money Tracking Dashboard</div>
+    <img src="MART.png" alt="Logo for Money Accounting & Resource Tracking" class="img" width="40%" align-items="center">
+    <div class="navbar"><a href="register.html">Click here to register</a></div>
+    <div class="sub-header">Easily manage your expenses, savings, and financial goals. Join MART to boost your savings and check financial spending.</div>
+    <div class="card-container">
+        <div class="card">
+            <img src="https://th.bing.com/th/id/OIP.Yd718ONEFY1ITLivju_9tAHaE8?rs=1&pid=ImgDetMain" alt="Expense Tracking">
+            <h3>Expense Tracking</h3>
+            <p>Monitor your daily spending and ensure financial discipline.</p>
+        </div>
+        <div class="card">
+            <img src="https://static.vecteezy.com/system/resources/previews/002/712/505/non_2x/bundle-of-saving-management-icons-and-saving-management-lettering-vector.jpg" alt="Savings Management">
+            <h3>Savings Management</h3>
+            <p>Plan your savings with detailed insights and reports.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn4.vectorstock.com/i/1000x1000/24/58/finance-and-banking-budget-planning-concept-vector-25102458.jpg" alt="Budget Planning">
+            <h3>Budget Planning</h3>
+            <p>Set budgets and stick to your financial goals.</p>
+        </div>
+        <div class="card">
+            <img src="https://th.bing.com/th/id/OIP.dRHESRQnUQuon1e5Iufs1AHaG2?rs=1&pid=ImgDetMain" alt="Secure & Private">
+            <h3>Secure & Private</h3>
+            <p>Your financial data is protected with top security standards.</p>
+        </div>
+    </div>
 </body>
 </html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account</title>
+    <link rel="icon" type="css" href="MART.png">
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #ECDFCC, #D6BD98);
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+    }
+    
+    .account-container {
+        text-align: center;
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .profile-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .profile-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+    
+    button {
+        background-color: #d9534f;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #c9302c;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>User Account</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="logout.html">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <section class="profile">
+            <h2>Profile Information</h2>
+            <img id="profile-pic" src="https://th.bing.com/th/id/OIP.MVJcYEbxpX4e2MAmqWtXAwHaHa?rs=1&pid=ImgDetMain" alt="User Avatar" width="30%">
+            <p><strong>Name:</strong> <span id="user-name">Loading...</span></p>
+            <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+            <button id="edit-profile">Edit Profile</button>
+        </section>
+        
+        <section class="financial-info">
+            <h2>Financial Overview</h2>
+            <p><strong>Total Savings:</strong> $<span id="total-savings">0.00</span></p>
+            <p><strong>Total Expenses:</strong> $<span id="total-expenses">0.00</span></p>
+            <p><strong>Recent Transactions:</strong></p>
+            <ul id="transaction-list">
+                <li>Loading...</li>
+            </ul>
+        </section>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const userName = document.getElementById('user-name');
+    const userEmail = document.getElementById('user-email');
+    const logoutButton = document.getElementById('logout-button');
+
+    // Simulate fetching user data from localStorage or an API
+    const userData = JSON.parse(localStorage.getItem('user')) || {
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        balance: '$5,000',
+        expenses: '$2,000',
+        savings: '$3,000'
+    };
+
+    // Populate user details on the page
+    userName.textContent = userData.name;
+    userEmail.textContent = userData.email;
+    document.getElementById('account-balance').textContent = userData.balance;
+    document.getElementById('expenses').textContent = userData.expenses;
+    document.getElementById('savings').textContent = userData.savings;
+
+    // Logout functionality
+    logoutButton.addEventListener('click', function() {
+        localStorage.removeItem('user');
+        window.location.href = 'login.html';
+    });
+});
+
+    </script>
+</body>
+</html>

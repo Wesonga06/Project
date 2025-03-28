@@ -49,6 +49,7 @@ section {
 form {
     display: flex;
     flex-direction: column;
+    margin: 30px 0px;
 }
 
 label, input, select, button {
@@ -102,3 +103,4 @@ transaction-form {
     width: 30%;
     height: 40%;
 }
+

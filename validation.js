@@ -7,31 +7,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$/;
 
-    // Add event listeners for real-time validation on registration form
     if (registerForm) {
-        registerForm.username.addEventListener('input', validateUsername);
-        registerForm.email.addEventListener('input', validateEmail);
-        registerForm.password.addEventListener('input', validatePassword);
-        registerForm['confirm-password'].addEventListener('input', validateConfirmPassword);
-        registerForm.dob.addEventListener('input', validateDOB);
+        registerForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (validateRegistration()) {
+                alert('Registration successful! Redirecting to home page...');
+                window.location.href = 'index.html';
+            }
+        });
     }
 
-    // Add event listeners for real-time validation on login form
     if (loginForm) {
-        loginForm.email.addEventListener('input', validateLoginEmail);
-        loginForm.password.addEventListener('input', validateLoginPassword);
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (validateLogin()) {
+                alert('Login successful! Redirecting to home page...');
+                window.location.href = 'index.html';
+            }
+        });
+    }
+
+    function validateRegistration() {
+        return validateUsername() && validateEmail() && validatePassword() && validateConfirmPassword() && validateDOB();
+    }
+
+    function validateLogin() {
+        return validateLoginEmail() && validateLoginPassword();
     }
 
     function validateUsername() {
         const errorMessage = document.getElementById('username-error');
         if (!namePattern.test(registerForm.username.value)) {
-            errorMessage.textContent = 'Username must contain only alphabetic characters without spaces or numbers.';
+            errorMessage.textContent = 'Username must contain only alphabetic characters.';
             errorMessage.style.color = 'red';
             return false;
-        } else {
-            errorMessage.textContent = '';
-            return true;
         }
+        errorMessage.textContent = '';
+        return true;
     }
 
     function validateEmail() {
@@ -40,26 +52,20 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.textContent = 'Enter a valid email address.';
             errorMessage.style.color = 'red';
             return false;
-        } else {
-            errorMessage.textContent = '';
-            return true;
         }
+        errorMessage.textContent = '';
+        return true;
     }
 
     function validatePassword() {
         const errorMessage = document.getElementById('password-error');
-        const passwordStrength = document.getElementById('passwordStrength');
         if (!passwordPattern.test(registerForm.password.value)) {
-            errorMessage.textContent = 'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.';
+            errorMessage.textContent = 'Password must contain at least one uppercase, one lowercase, one digit, and one special character.';
             errorMessage.style.color = 'red';
-            passwordStrength.textContent = '';
             return false;
-        } else {
-            errorMessage.textContent = '';
-            const strength = getPasswordStrength(registerForm.password.value);
-            passwordStrength.textContent = `Password Strength: ${strength}`;
-            return true;
         }
+        errorMessage.textContent = '';
+        return true;
     }
 
     function validateConfirmPassword() {
@@ -68,10 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.textContent = 'Passwords do not match.';
             errorMessage.style.color = 'red';
             return false;
-        } else {
-            errorMessage.textContent = '';
-            return true;
         }
+        errorMessage.textContent = '';
+        return true;
     }
 
     function validateDOB() {
@@ -79,18 +84,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const today = new Date();
         const dobDate = new Date(registerForm.dob.value);
         const age = today.getFullYear() - dobDate.getFullYear();
-        const month = today.getMonth() - dobDate.getMonth();
-        if (month < 0 || (month === 0 && today.getDate() < dobDate.getDate())) {
-            age--;
-        }
         if (age < 18) {
             errorMessage.textContent = 'You must be at least 18 years old to register.';
             errorMessage.style.color = 'red';
             return false;
-        } else {
-            errorMessage.textContent = '';
-            return true;
         }
+        errorMessage.textContent = '';
+        return true;
     }
 
     function validateLoginEmail() {
@@ -99,31 +99,19 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage.textContent = 'Enter a valid email address.';
             errorMessage.style.color = 'red';
             return false;
-        } else {
-            errorMessage.textContent = '';
-            return true;
         }
+        errorMessage.textContent = '';
+        return true;
     }
 
     function validateLoginPassword() {
         const errorMessage = document.getElementById('login-password-error');
         if (!passwordPattern.test(loginForm.password.value)) {
-            errorMessage.textContent = 'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.';
+            errorMessage.textContent = 'Invalid password format.';
             errorMessage.style.color = 'red';
             return false;
-        } else {
-            errorMessage.textContent = '';
-            return true;
         }
-    }
-
-    function getPasswordStrength(password) {
-        if (password.length >= 12) {
-            return 'Strong';
-        } else if (password.length >= 8) {
-            return 'Moderate';
-        } else {
-            return 'Weak';
-        }
+        errorMessage.textContent = '';
+        return true;
     }
 });
